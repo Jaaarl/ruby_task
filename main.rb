@@ -42,7 +42,7 @@ while choice != 3
     if is_found
       people = people.delete_if { |x| x[:national_id] == national_id }
       puts "Successfully deleted."
-      people.each do |person|
+      people.first(20).each do |person|
         print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
       end
     else
@@ -66,7 +66,7 @@ while choice != 3
       puts "User added successfully!"
       new_user = { name: name, national_id: national_id, age: age }
       people.unshift(new_user)
-      people.each do |person|
+      people.first(20).each do |person|
         print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
       end
     else
