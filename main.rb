@@ -31,28 +31,7 @@ while true
 
   choice = gets.chomp.to_i
 
-  if choice == 2
-    puts "enter the national id"
-    national_id = gets.chomp.to_i
-    is_found = false
-    index_found = 0
-    people.each_index do |x|
-      if people[x][:national_id] == national_id
-        is_found = true
-        index_found = x
-      end
-    end
-    if is_found
-      people = people.delete_if { |x| x[:national_id] == national_id }
-      puts "Successfully deleted."
-      people.first(20).each do |person|
-        print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
-      end
-    else
-      puts "User not found."
-    end
-
-  elsif choice == 1
+  if choice == 1
     p "enter a national id"
     national_id = gets.chomp.to_i
     p "enter a name"
@@ -74,6 +53,27 @@ while true
       end
     else
       puts "Failed to add: National ID already exists."
+    end
+
+  elsif choice == 2
+    puts "enter the national id"
+    national_id = gets.chomp.to_i
+    is_found = false
+    index_found = 0
+    people.each_index do |x|
+      if people[x][:national_id] == national_id
+        is_found = true
+        index_found = x
+      end
+    end
+    if is_found
+      people = people.delete_if { |x| x[:national_id] == national_id }
+      puts "Successfully deleted."
+      people.first(20).each do |person|
+        print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
+      end
+    else
+      puts "User not found."
     end
 
   elsif choice == 3
@@ -125,6 +125,7 @@ while true
         print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
       end
     end
+
   elsif choice == 5
     puts "Are you sure you want to exit (y/n)?"
     exit = gets.chomp
@@ -132,5 +133,4 @@ while true
       break
     end
   end
-
 end
