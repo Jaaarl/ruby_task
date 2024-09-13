@@ -21,11 +21,13 @@ people = [
   { name: "Marry", national_id: 118, age: 12 },
 ]
 choice = 0
-while choice != 3
+while choice != 4
   puts "\nSelect"
   puts "[1]add to user"
   puts "[2]delete to user"
-  puts "[3]exit"
+  puts "[3]search"
+  puts "[4]exit"
+
   choice = gets.chomp.to_i
 
   if choice == 2
@@ -72,5 +74,33 @@ while choice != 3
     else
       puts "Failed to add: National ID already exists."
     end
+
+  elsif choice == 3
+    puts "\nSelect"
+    puts "[1]search by ID"
+    puts "[2]search by name"
+    choice_2 = gets.chomp.to_i
+    if choice_2 == 1
+      puts "enter you ID"
+      search_input = gets.chomp.to_i
+      searched = people.select { |x| x[:national_id] == search_input }
+      if searched == []
+        puts "User not found"
+      else
+        puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
+      end
+    end
+
+    if choice_2 == 2
+      puts "enter you name"
+      search_input = gets.chomp
+      searched = people.select { |x| x[:name] == search_input }
+      if searched == []
+        puts "User not found"
+      else
+        puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
+      end
+    end
   end
+
 end
