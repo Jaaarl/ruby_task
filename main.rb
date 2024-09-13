@@ -97,7 +97,7 @@ while true
       search_input = gets.chomp
       searched = people.select { |x| x[:name] == search_input }
       if searched == []
-        puts "User not found"
+        puts "User not dounf"
       else
         puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
       end
@@ -108,7 +108,7 @@ while true
     search_input = gets.chomp.to_i
     searched = people.select { |x| x[:national_id] == search_input }
     if searched == []
-      puts "User not found"
+      puts "User not dounf"
     else
       # puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
       puts "enter your new name"
