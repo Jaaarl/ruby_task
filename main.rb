@@ -26,7 +26,6 @@ p "enter a name"
 name = gets.chomp
 p "enter a age"
 age = gets.chomp.to_i
-# national_id = 231
 unique = true
 people.each_index do |x|
   if people[x][:national_id] == national_id
@@ -39,3 +38,5 @@ if unique
 else
   print "Failed to add: National ID already exists."
 end
+new_user = { name: name, national_id: national_id, age: age }
+people.push(new_user)
