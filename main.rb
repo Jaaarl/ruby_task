@@ -21,7 +21,7 @@ people = [
   { name: "Marry", national_id: 118, age: 12 },
 ]
 choice = 0
-while choice != 4
+while true
   puts "\nSelect"
   puts "[1]add to user"
   puts "[2]delete to user"
@@ -100,6 +100,12 @@ while choice != 4
       else
         puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
       end
+    end
+  elsif choice == 4
+    puts "Are you sure you want to exit (y/n)?"
+    exit = gets.chomp
+    if exit == 'y'
+      break
     end
   end
 
