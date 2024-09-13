@@ -26,7 +26,8 @@ while true
   puts "[1]add to user"
   puts "[2]delete to user"
   puts "[3]search"
-  puts "[4]exit"
+  puts "[4]edit"
+  puts "[5]exit"
 
   choice = gets.chomp.to_i
 
@@ -81,11 +82,11 @@ while true
     puts "[2]search by name"
     choice_2 = gets.chomp.to_i
     if choice_2 == 1
-      puts "enter you ID"
+      puts "enter your ID"
       search_input = gets.chomp.to_i
       searched = people.select { |x| x[:national_id] == search_input }
       if searched == []
-        puts "User not found"
+        puts "User not dounf"
       else
         puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
       end
@@ -101,7 +102,30 @@ while true
         puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
       end
     end
+
   elsif choice == 4
+      puts "enter your National ID"
+      search_input = gets.chomp.to_i
+      searched = people.select { |x| x[:national_id] == search_input }
+      if searched == []
+        puts "User not found"
+      else
+        # puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
+        puts "enter your new name"
+        new_name = gets.chomp
+        puts "enter your new age"
+        new_age = gets.chomp
+        people.each_index do |x|
+          if people[x][:national_id] == search_input
+            people[x][:name] = new_name
+            people[x][:age] = new_age
+          end
+        end
+        people.first(20).each do |person|
+          print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
+        end
+      end
+  elsif choice == 5
     puts "Are you sure you want to exit (y/n)?"
     exit = gets.chomp
     if exit == 'y'
