@@ -20,4 +20,22 @@ people = [
   { name: "Mae", national_id: 194, age: 24 },
   { name: "Marry", national_id: 118, age: 12 },
 ]
-p people
+p "enter a national id"
+national_id = gets.chomp.to_i
+p "enter a name"
+name = gets.chomp
+p "enter a age"
+age = gets.chomp.to_i
+# national_id = 231
+unique = true
+people.each_index do |x|
+  if people[x][:national_id] == national_id
+    unique = false
+  end
+end
+
+if unique
+    print "User added successfully!"
+else
+  print "Failed to add: National ID already exists."
+end
