@@ -20,53 +20,57 @@ people = [
   { name: "Mae", national_id: 194, age: 24 },
   { name: "Marry", national_id: 118, age: 12 },
 ]
-p "Select"
-p "[1]add to user"
-p "[2]delete to user"
-choice = gets.chomp.to_i
-if choice == 2
-  puts "enter the national id"
-  national_id = gets.chomp.to_i
-  is_found = false
-  index_found = 0
-  people.each_index do |x|
-    if people[x][:national_id] == national_id
-      is_found = true
-      index_found = x
-    end
-  end
-  if is_found
-    people = people.delete_if { |x| x[:national_id] == national_id }
-    puts "Successfully deleted."
-    people.each do |person|
-      print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
-    end
-  else
-    puts "User not found."
-  end
-elsif choice == 1
-  p "enter a national id"
-  national_id = gets.chomp.to_i
-  p "enter a name"
-  name = gets.chomp
-  p "enter a age"
-  age = gets.chomp.to_i
-  unique = true
-  people.each_index do |x|
-    if people[x][:national_id] == national_id
-      unique = false
-    end
-  end
-  if unique
-    puts "User added successfully!"
-    new_user = { name: name, national_id: national_id, age: age }
-    people.unshift(new_user)
-    people.each do |person|
-      print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
-    end
-  else
-    print "Failed to add: National ID already exists."
-  end
+choice = 0
+while choice != 3
+  puts "\nSelect"
+  puts "[1]add to user"
+  puts "[2]delete to user"
+  puts "[3]exit"
+  choice = gets.chomp.to_i
 
+  if choice == 2
+    puts "enter the national id"
+    national_id = gets.chomp.to_i
+    is_found = false
+    index_found = 0
+    people.each_index do |x|
+      if people[x][:national_id] == national_id
+        is_found = true
+        index_found = x
+      end
+    end
+    if is_found
+      people = people.delete_if { |x| x[:national_id] == national_id }
+      puts "Successfully deleted."
+      people.each do |person|
+        print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
+      end
+    else
+      puts "User not found."
+    end
+
+  elsif choice == 1
+    p "enter a national id"
+    national_id = gets.chomp.to_i
+    p "enter a name"
+    name = gets.chomp
+    p "enter a age"
+    age = gets.chomp.to_i
+    unique = true
+    people.each_index do |x|
+      if people[x][:national_id] == national_id
+        unique = false
+      end
+    end
+    if unique
+      puts "User added successfully!"
+      new_user = { name: name, national_id: national_id, age: age }
+      people.unshift(new_user)
+      people.each do |person|
+        print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
+      end
+    else
+      puts "Failed to add: National ID already exists."
+    end
+  end
 end
-
