@@ -33,9 +33,7 @@ def delete_user(people)
   if is_found
     people = people.delete_if { |x| x[:national_id] == national_id }
     puts "Successfully deleted."
-    people.first(20).each do |person|
-      print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
-    end
+    show_user(people)
   else
     puts "User not found."
   end
@@ -114,7 +112,7 @@ people = [
 ]
 
 def show_user(people)
-  people.first(20).each do |person|
+  people.first(5).each do |person|
     print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
   end
 end
