@@ -22,25 +22,22 @@ def add_user(people)
 end
 
 def delete_user(people)
-  p "enter a national id"
+  puts "enter the national id"
   national_id = gets.chomp.to_i
-  p "enter a name"
-  name = gets.chomp
-  p "enter a age"
-  age = gets.chomp.to_i
-  unique = true
-  people.each_index do |person|
-    if people[person][:national_id] == national_id
-      unique = false
+  is_found = false
+  people.each_index do |x|
+    if people[x][:national_id] == national_id
+      is_found = true
     end
   end
-  if unique
-    puts "User added successfully!"
-    new_user = { name: name, national_id: national_id, age: age }
-    people.unshift(new_user)
-    show_user(people)
+  if is_found
+    people = people.delete_if { |x| x[:national_id] == national_id }
+    puts "Successfully deleted."
+    people.first(20).each do |person|
+      print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
+    end
   else
-    puts "Failed to add: National ID already exists."
+    puts "User not found."
   end
 end
 
