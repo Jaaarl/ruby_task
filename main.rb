@@ -1,3 +1,98 @@
+def add_user(people)
+  p "enter a national id"
+  national_id = gets.chomp.to_i
+  p "enter a name"
+  name = gets.chomp
+  p "enter a age"
+  age = gets.chomp.to_i
+  unique = true
+  people.each_index do |x|
+    if people[x][:national_id] == national_id
+      unique = false
+    end
+  end
+  if unique
+    puts "User added successfully!"
+    new_user = { name: name, national_id: national_id, age: age }
+    people.unshift(new_user)
+    show_user(people)
+  else
+    puts "Failed to add: National ID already exists."
+  end
+end
+
+def delete_user(people)
+  p "enter a national id"
+  national_id = gets.chomp.to_i
+  p "enter a name"
+  name = gets.chomp
+  p "enter a age"
+  age = gets.chomp.to_i
+  unique = true
+  people.each_index do |x|
+    if people[x][:national_id] == national_id
+      unique = false
+    end
+  end
+  if unique
+    puts "User added successfully!"
+    new_user = { name: name, national_id: national_id, age: age }
+    people.unshift(new_user)
+    show_user(people)
+  else
+    puts "Failed to add: National ID already exists."
+  end
+end
+
+def search_user(people)
+  puts "\nSelect"
+  puts "[1]search by ID"
+  puts "[2]search by name"
+  choice_2 = gets.chomp.to_i
+  if choice_2 == 1
+    puts "enter your ID"
+    search_input = gets.chomp.to_i
+    searched = people.select { |x| x[:national_id] == search_input }
+    if searched == []
+      puts "User not dounf"
+    else
+      puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
+    end
+  end
+
+  if choice_2 == 2
+    puts "enter you name"
+    search_input = gets.chomp
+    searched = people.select { |x| x[:name] == search_input }
+    if searched == []
+      puts "User not dounf"
+    else
+      puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
+    end
+  end
+end
+
+def edit_user(people)
+  puts "enter your National ID"
+  search_input = gets.chomp.to_i
+  searched = people.select { |x| x[:national_id] == search_input }
+  if searched == []
+    puts "User not dounf"
+  else
+    puts "enter your new name"
+    new_name = gets.chomp
+    puts "enter your new age"
+    new_age = gets.chomp
+    people.each_index do |x|
+      if people[x][:national_id] == search_input
+        people[x][:name] = new_name
+        people[x][:age] = new_age
+      end
+    end
+    show_user(people)
+  end
+end
+
 people = [
   { name: "Joshua", national_id: 334, age: 32 },
   { name: "Precious", national_id: 544, age: 50 },
@@ -20,112 +115,37 @@ people = [
   { name: "Mae", national_id: 194, age: 24 },
   { name: "Marry", national_id: 118, age: 12 },
 ]
-puts "List of People"
-people.first(20).each do |person|
-  print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
+
+def show_user(people)
+  people.first(20).each do |person|
+    print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
+  end
 end
+
+puts "List of People"
+show_user(people)
 
 while true
   puts "\nChoose an option"
-  puts "[1]add to user"
-  puts "[2]delete to user"
-  puts "[3]search"
-  puts "[4]edit"
+  puts "[1]add a user"
+  puts "[2]delete a user"
+  puts "[3]search a user"
+  puts "[4]edit a user"
   puts "[5]exit"
 
   choice = gets.chomp.to_i
 
   if choice == 1
-    p "enter a national id"
-    national_id = gets.chomp.to_i
-    p "enter a name"
-    name = gets.chomp
-    p "enter a age"
-    age = gets.chomp.to_i
-    unique = true
-    people.each_index do |x|
-      if people[x][:national_id] == national_id
-        unique = false
-      end
-    end
-    if unique
-      puts "User added successfully!"
-      new_user = { name: name, national_id: national_id, age: age }
-      people.unshift(new_user)
-      people.first(20).each do |person|
-        print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
-      end
-    else
-      puts "Failed to add: National ID already exists."
-    end
+    add_user(people)
 
   elsif choice == 2
-    puts "enter the national id"
-    national_id = gets.chomp.to_i
-    is_found = false
-    people.each_index do |x|
-      if people[x][:national_id] == national_id
-        is_found = true
-      end
-    end
-    if is_found
-      people = people.delete_if { |x| x[:national_id] == national_id }
-      puts "Successfully deleted."
-      people.first(20).each do |person|
-        print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
-      end
-    else
-      puts "User not found."
-    end
+    delete_user(people)
 
   elsif choice == 3
-    puts "\nSelect"
-    puts "[1]search by ID"
-    puts "[2]search by name"
-    choice_2 = gets.chomp.to_i
-    if choice_2 == 1
-      puts "enter your ID"
-      search_input = gets.chomp.to_i
-      searched = people.select { |x| x[:national_id] == search_input }
-      if searched == []
-        puts "User not dounf"
-      else
-        puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
-      end
-    end
-
-    if choice_2 == 2
-      puts "enter you name"
-      search_input = gets.chomp
-      searched = people.select { |x| x[:name] == search_input }
-      if searched == []
-        puts "User not dounf"
-      else
-        puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
-      end
-    end
+    search_user(people)
 
   elsif choice == 4
-    puts "enter your National ID"
-    search_input = gets.chomp.to_i
-    searched = people.select { |x| x[:national_id] == search_input }
-    if searched == []
-      puts "User not dounf"
-    else
-      puts "enter your new name"
-      new_name = gets.chomp
-      puts "enter your new age"
-      new_age = gets.chomp
-      people.each_index do |x|
-        if people[x][:national_id] == search_input
-          people[x][:name] = new_name
-          people[x][:age] = new_age
-        end
-      end
-      people.first(20).each do |person|
-        print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
-      end
-    end
+    edit_user(people)
 
   elsif choice == 5
     puts "Are you sure you want to exit (y/n)?"
