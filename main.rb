@@ -25,13 +25,13 @@ def delete_user(people)
   puts "enter the national id"
   national_id = gets.chomp.to_i
   is_found = false
-  people.each_index do |x|
-    if people[x][:national_id] == national_id
+  people.each_index do |person|
+    if people[person][:national_id] == national_id
       is_found = true
     end
   end
   if is_found
-    people = people.delete_if { |x| x[:national_id] == national_id }
+    people = people.delete_if { |person| person[:national_id] == national_id }
     puts "Successfully deleted."
     show_user(people)
   else
