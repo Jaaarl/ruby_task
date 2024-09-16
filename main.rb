@@ -6,8 +6,8 @@ def add_user(people)
   p "enter a age"
   age = gets.chomp.to_i
   unique = true
-  people.each_index do |x|
-    if people[x][:national_id] == national_id
+  people.each_index do |person|
+    if people[person][:national_id] == national_id
       unique = false
     end
   end
@@ -29,8 +29,8 @@ def delete_user(people)
   p "enter a age"
   age = gets.chomp.to_i
   unique = true
-  people.each_index do |x|
-    if people[x][:national_id] == national_id
+  people.each_index do |person|
+    if people[person][:national_id] == national_id
       unique = false
     end
   end
@@ -48,11 +48,11 @@ def search_user(people)
   puts "\nSelect"
   puts "[1]search by ID"
   puts "[2]search by name"
-  choice_2 = gets.chomp.to_i
-  if choice_2 == 1
+  choice = gets.chomp.to_i
+  if choice == 1
     puts "enter your ID"
     search_input = gets.chomp.to_i
-    searched = people.select { |x| x[:national_id] == search_input }
+    searched = people.select { |person| person[:national_id] == search_input }
     if searched == []
       puts "User not dounf"
     else
@@ -60,10 +60,10 @@ def search_user(people)
     end
   end
 
-  if choice_2 == 2
+  if choice == 2
     puts "enter you name"
     search_input = gets.chomp
-    searched = people.select { |x| x[:name] == search_input }
+    searched = people.select { |person| person[:name] == search_input }
     if searched == []
       puts "User not dounf"
     else
@@ -75,7 +75,7 @@ end
 def edit_user(people)
   puts "enter your National ID"
   search_input = gets.chomp.to_i
-  searched = people.select { |x| x[:national_id] == search_input }
+  searched = people.select { |person| person[:national_id] == search_input }
   if searched == []
     puts "User not dounf"
   else
@@ -83,10 +83,10 @@ def edit_user(people)
     new_name = gets.chomp
     puts "enter your new age"
     new_age = gets.chomp
-    people.each_index do |x|
-      if people[x][:national_id] == search_input
-        people[x][:name] = new_name
-        people[x][:age] = new_age
+    people.each_index do |person|
+      if people[person][:national_id] == search_input
+        people[person][:name] = new_name
+        people[person][:age] = new_age
       end
     end
     show_user(people)
