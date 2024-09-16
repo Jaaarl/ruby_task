@@ -88,6 +88,12 @@ def edit_user(people)
   end
 end
 
+def exit_program
+  puts "Are you sure you want to exit (y/n)?"
+  choice = gets.chomp
+  exit if choice == 'y'
+end
+
 people = [
   { name: "Joshua", national_id: 334, age: 32 },
   { name: "Precious", national_id: 544, age: 50 },
@@ -143,8 +149,6 @@ while true
     edit_user(people)
 
   elsif choice == 5
-    puts "Are you sure you want to exit (y/n)?"
-    exit = gets.chomp
-    break if exit == 'y'
+    exit_program
   end
 end
