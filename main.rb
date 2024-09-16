@@ -20,9 +20,13 @@ people = [
   { name: "Mae", national_id: 194, age: 24 },
   { name: "Marry", national_id: 118, age: 12 },
 ]
-choice = 0
+puts "List of People"
+people.first(20).each do |person|
+  print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
+end
+
 while true
-  puts "\nSelect"
+  puts "\nChoose an option"
   puts "[1]add to user"
   puts "[2]delete to user"
   puts "[3]search"
@@ -59,11 +63,9 @@ while true
     puts "enter the national id"
     national_id = gets.chomp.to_i
     is_found = false
-    index_found = 0
     people.each_index do |x|
       if people[x][:national_id] == national_id
         is_found = true
-        index_found = x
       end
     end
     if is_found
@@ -110,7 +112,6 @@ while true
     if searched == []
       puts "User not dounf"
     else
-      # puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
       puts "enter your new name"
       new_name = gets.chomp
       puts "enter your new age"
@@ -129,8 +130,6 @@ while true
   elsif choice == 5
     puts "Are you sure you want to exit (y/n)?"
     exit = gets.chomp
-    if exit == 'y'
-      break
-    end
+    break if exit == 'y'
   end
 end
