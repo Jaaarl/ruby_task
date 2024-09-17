@@ -1,3 +1,20 @@
+class Person
+  attr_accessor :name, :age, :national_id
+  @@record = []
+
+  def save
+    @@record.prepend(self)
+  end
+
+end
+
+person_1 = Person.new
+person_1.name = "jerome"
+person_1.age = 18
+person_1.national_id = 23131
+person_1.save
+# p Person.@@data
+
 def add_user(people)
   p "enter a national id"
   national_id = gets.chomp.to_i
