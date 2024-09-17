@@ -135,7 +135,7 @@ while true
   puts "[5]exit"
 
   choice = gets.chomp.to_i
-
+  system("clear")
   if choice == 1
     add_user(people)
 
