@@ -12,6 +12,10 @@ class Person
   def self.first
     return @@record.first
   end
+
+  def self.last
+    return @@record.last
+  end
 end
 
 person_1 = Person.new
