@@ -5,7 +5,9 @@ class Person
   def save
     @@record.prepend(self)
   end
-
+  def self.all
+    return  @@record
+  end
 end
 
 person_1 = Person.new
