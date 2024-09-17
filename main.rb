@@ -138,16 +138,12 @@ while true
   system("clear")
   if choice == 1
     add_user(people)
-
   elsif choice == 2
     delete_user(people)
-
   elsif choice == 3
     search_user(people)
-
   elsif choice == 4
     edit_user(people)
-
   elsif choice == 5
     exit_program
   end
