@@ -8,6 +8,10 @@ class Person
   def self.all
     return  @@record
   end
+
+  def self.first
+    return @@record.first
+  end
 end
 
 person_1 = Person.new
