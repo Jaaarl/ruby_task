@@ -64,32 +64,19 @@ person_1.age = 20
 person_1.national_id = 123
 person_1.save
 
-# p Person.search_name("jarl")
-# p Person.search_id(123)
-# Person.destory_all
-# Person.destroy_all
-# p Person.all
-p Person.count
-def add_user(people)
-  p "Enter your national id"
-  national_id = gets.chomp.to_i
-  p "Enter your name"
-  name = gets.chomp
-  p "Enter your age"
-  age = gets.chomp.to_i
-  unique = true
-  people.each_index do |person|
-    if people[person][:national_id] == national_id
-      unique = false
-    end
-  end
-  if unique
-    puts "User added successfully!"
-    new_user = { name: name, national_id: national_id, age: age }
-    people.unshift(new_user)
-    show_user(people)
+def add_user
+  new_Person = Person.new
+  puts "Enter your national id"
+  new_Person.national_id = gets.chomp.to_i
+  puts "Enter your name"
+  new_Person.name = gets.chomp
+  puts "Enter your age"
+  new_Person.age = gets.chomp.to_i
+  # puts new_Person.national_id
+  if Person.search_id(new_Person.national_id) == nil
+    new_Person.save
   else
-    puts "Failed to add: National ID already exists."
+    puts "Failed to add: National ID already exists"
   end
 end
 
@@ -209,7 +196,7 @@ while true
   choice = gets.chomp.to_i
   system("clear")
   if choice == 1
-    add_user(people)
+    add_user
   elsif choice == 2
     delete_user(people)
   elsif choice == 3
