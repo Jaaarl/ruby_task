@@ -35,6 +35,14 @@ class Person
   def self.search_id (id)
     return @@records.find { |person| person.national_id == id }
   end
+
+  def destroy
+    @@records.delete(self)
+  end
+
+  def update
+
+  end
 end
 
 person_1 = Person.new
@@ -51,7 +59,6 @@ person_1.save
 
 p Person.search_name("jarl")
 p Person.search_id(123)
-# p Person.find_by_national_id(1234)
 
 def add_user(people)
   p "Enter your national id"
