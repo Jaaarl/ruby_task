@@ -40,6 +40,9 @@ class Person
     @@records.delete(self)
   end
 
+  def self.destroy_all
+    @@records.clear
+  end
   def update
 
   end
@@ -57,9 +60,11 @@ person_1.age = 20
 person_1.national_id = 123
 person_1.save
 
-p Person.search_name("jarl")
-p Person.search_id(123)
-
+# p Person.search_name("jarl")
+# p Person.search_id(123)
+# Person.destory_all
+Person.destroy_all
+p Person.all
 def add_user(people)
   p "Enter your national id"
   national_id = gets.chomp.to_i
