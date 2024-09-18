@@ -25,7 +25,15 @@ class Person
   end
 
   def self.find_by_national_id (search_id)
-    return @@records.find {|record| record.national_id == search_id}
+    return @@records.find { |record| record.national_id == search_id }
+  end
+
+  def self.search_name (name)
+    return @@records.find { |person| person.name == name }
+  end
+
+  def self.search_id (id)
+    return @@records.find { |person| person.national_id == id }
   end
 end
 
@@ -41,7 +49,9 @@ person_1.age = 20
 person_1.national_id = 123
 person_1.save
 
-
+p Person.search_name("jarl")
+p Person.search_id(123)
+# p Person.find_by_national_id(1234)
 
 def add_user(people)
   p "Enter your national id"
