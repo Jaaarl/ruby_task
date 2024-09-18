@@ -19,9 +19,7 @@ class Person
   end
 
   def display
-    puts "Name: #{self.name}"
-    puts "Age: #{self.age}"
-    puts "National Id: #{self.national_id}"
+    puts "Name: #{self.name}, Age: #{self.age}, National Id: #{self.national_id}"
   end
 
   def self.find_by_national_id (search_id)
@@ -64,17 +62,25 @@ person_1.age = 20
 person_1.national_id = 123
 person_1.save
 
+def show_user
+  # people.first(5).each do |person|
+  #   print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
+  # end
+  Person.all.each do |person1|
+    person1.display
+  end
+end
 def add_user
-  new_Person = Person.new
+  new_person = Person.new
   puts "Enter your national id"
-  new_Person.national_id = gets.chomp.to_i
+  new_person.national_id = gets.chomp.to_i
   puts "Enter your name"
-  new_Person.name = gets.chomp
+  new_person.name = gets.chomp
   puts "Enter your age"
-  new_Person.age = gets.chomp.to_i
+  new_person.age = gets.chomp.to_i
   # puts new_Person.national_id
-  if Person.search_id(new_Person.national_id) == nil
-    new_Person.save
+  if Person.search_id(new_person.national_id) == nil
+    new_person.save
   else
     puts "Failed to add: National ID already exists"
   end
@@ -92,26 +98,34 @@ def delete_user(people)
   if is_found
     people = people.delete_if { |person| person[:national_id] == national_id }
     puts "Successfully deleted."
-    show_user(people)
+    show_user
   else
     puts "User not found."
   end
 end
 
-def search_user(people)
+def search_user
   puts "\nSelect"
   puts "[1] Search by ID"
   puts "[2] Search by name"
   choice = gets.chomp.to_i
   if choice == 1
     puts "Enter your ID"
-    search_input = gets.chomp.to_i
-    searched = people.select { |person| person[:national_id] == search_input }
-    if searched == []
+    person = Person.search_id(gets.chomp.to_i)
+    puts person
+    if person == nil
       puts "User not dounf"
     else
-      puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
+      person.display
     end
+
+    # search_input = gets.chomp.to_i
+    # searched = people.select { |person| person[:national_id] == search_input }
+    # if searched == []
+    #   puts "User not dounf"
+    # else
+    #   puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
+    # end
   end
 
   if choice == 2
@@ -143,7 +157,7 @@ def edit_user(people)
         people[person][:age] = new_age
       end
     end
-    show_user(people)
+    show_user
   end
 end
 
@@ -153,37 +167,33 @@ def exit_program
   exit if choice == 'y'
 end
 
-people = [
-  { name: "Joshua", national_id: 334, age: 32 },
-  { name: "Precious", national_id: 544, age: 50 },
-  { name: "Jerome", national_id: 367, age: 65 },
-  { name: "Jose", national_id: 965, age: 29 },
-  { name: "Jarl", national_id: 421, age: 28 },
-  { name: "Jerald", national_id: 742, age: 24 },
-  { name: "Jean", national_id: 235, age: 21 },
-  { name: "Rose", national_id: 654, age: 24 },
-  { name: "Renzo", national_id: 975, age: 25 },
-  { name: "Ivan", national_id: 786, age: 21 },
-  { name: "Renier", national_id: 556, age: 19 },
-  { name: "Eren", national_id: 557, age: 15 },
-  { name: "West", national_id: 667, age: 17 },
-  { name: "Jazer", national_id: 669, age: 10 },
-  { name: "Percy", national_id: 663, age: 17 },
-  { name: "Harry Potter", national_id: 321, age: 16 },
-  { name: "Manny", national_id: 236, age: 23 },
-  { name: "Ronaldo", national_id: 237, age: 31 },
-  { name: "Mae", national_id: 194, age: 24 },
-  { name: "Marry", national_id: 118, age: 12 },
-]
+# people = [
+#   { name: "Joshua", national_id: 334, age: 32 },
+#   { name: "Precious", national_id: 544, age: 50 },
+#   { name: "Jerome", national_id: 367, age: 65 },
+#   { name: "Jose", national_id: 965, age: 29 },
+#   { name: "Jarl", national_id: 421, age: 28 },
+#   { name: "Jerald", national_id: 742, age: 24 },
+#   { name: "Jean", national_id: 235, age: 21 },
+#   { name: "Rose", national_id: 654, age: 24 },
+#   { name: "Renzo", national_id: 975, age: 25 },
+#   { name: "Ivan", national_id: 786, age: 21 },
+#   { name: "Renier", national_id: 556, age: 19 },
+#   { name: "Eren", national_id: 557, age: 15 },
+#   { name: "West", national_id: 667, age: 17 },
+#   { name: "Jazer", national_id: 669, age: 10 },
+#   { name: "Percy", national_id: 663, age: 17 },
+#   { name: "Harry Potter", national_id: 321, age: 16 },
+#   { name: "Manny", national_id: 236, age: 23 },
+#   { name: "Ronaldo", national_id: 237, age: 31 },
+#   { name: "Mae", national_id: 194, age: 24 },
+#   { name: "Marry", national_id: 118, age: 12 },
+# ]
 
-def show_user(people)
-  people.first(5).each do |person|
-    print "Name: #{person[:name]}, National id: #{person[:national_id]}, Age: #{person[:age]}\n"
-  end
-end
+
 
 puts "List of People"
-show_user(people)
+show_user
 
 while true
   puts "\nChoose an option"
@@ -200,7 +210,7 @@ while true
   elsif choice == 2
     delete_user(people)
   elsif choice == 3
-    search_user(people)
+    search_user
   elsif choice == 4
     edit_user(people)
   elsif choice == 5
