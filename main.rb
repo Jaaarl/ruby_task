@@ -46,6 +46,10 @@ class Person
   def update
 
   end
+
+  def self.count
+    return @@records.size
+  end
 end
 
 person_1 = Person.new
@@ -63,8 +67,9 @@ person_1.save
 # p Person.search_name("jarl")
 # p Person.search_id(123)
 # Person.destory_all
-Person.destroy_all
-p Person.all
+# Person.destroy_all
+# p Person.all
+p Person.count
 def add_user(people)
   p "Enter your national id"
   national_id = gets.chomp.to_i
