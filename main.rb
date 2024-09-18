@@ -1,20 +1,21 @@
 class Person
   attr_accessor :name, :age, :national_id
-  @@record = []
+  @@records = []
 
   def save
-    @@record.prepend(self)
+    @@records.prepend(self)
   end
+
   def self.all
-    return  @@record
+    return  @@records
   end
 
   def self.first
-    return @@record.first
+    return @@records.first
   end
 
   def self.last
-    return @@record.last
+    return @@records.last
   end
 
   def display
@@ -29,14 +30,13 @@ person_1.name = "jerome"
 person_1.age = 18
 person_1.national_id = 23131
 person_1.save
-# p Person.@@data
 
 def add_user(people)
-  p "enter a national id"
+  p "Enter your national id"
   national_id = gets.chomp.to_i
-  p "enter a name"
+  p "Enter your name"
   name = gets.chomp
-  p "enter a age"
+  p "Enter your age"
   age = gets.chomp.to_i
   unique = true
   people.each_index do |person|
@@ -55,7 +55,7 @@ def add_user(people)
 end
 
 def delete_user(people)
-  puts "enter the national id"
+  puts "Enter the national id"
   national_id = gets.chomp.to_i
   is_found = false
   people.each_index do |person|
@@ -74,11 +74,11 @@ end
 
 def search_user(people)
   puts "\nSelect"
-  puts "[1]search by ID"
-  puts "[2]search by name"
+  puts "[1] Search by ID"
+  puts "[2] Search by name"
   choice = gets.chomp.to_i
   if choice == 1
-    puts "enter your ID"
+    puts "Enter your ID"
     search_input = gets.chomp.to_i
     searched = people.select { |person| person[:national_id] == search_input }
     if searched == []
@@ -89,7 +89,7 @@ def search_user(people)
   end
 
   if choice == 2
-    puts "enter you name"
+    puts "Enter your name"
     search_input = gets.chomp
     searched = people.select { |person| person[:name] == search_input }
     if searched == []
@@ -101,7 +101,7 @@ def search_user(people)
 end
 
 def edit_user(people)
-  puts "enter your National ID"
+  puts "Enter your National ID"
   search_input = gets.chomp.to_i
   searched = people.select { |person| person[:national_id] == search_input }
   if searched == []
