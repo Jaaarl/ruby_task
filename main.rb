@@ -112,30 +112,19 @@ def search_user
   if choice == 1
     puts "Enter your ID"
     person = Person.search_id(gets.chomp.to_i)
-    puts person
     if person == nil
       puts "User not dounf"
     else
       person.display
     end
-
-    # search_input = gets.chomp.to_i
-    # searched = people.select { |person| person[:national_id] == search_input }
-    # if searched == []
-    #   puts "User not dounf"
-    # else
-    #   puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
-    # end
   end
-
   if choice == 2
     puts "Enter your name"
-    search_input = gets.chomp
-    searched = people.select { |person| person[:name] == search_input }
-    if searched == []
+    person = Person.search_name(gets.chomp)
+    if person == nil
       puts "User not dounf"
     else
-      puts "\nThe details are:\nName :#{searched[0][:name]}\nNational id :#{searched[0][:national_id]}\nAge :#{searched[0][:age]}"
+      person.display
     end
   end
 end
