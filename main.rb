@@ -16,6 +16,12 @@ class Person
   def self.last
     return @@record.last
   end
+
+  def display
+    puts "Name: #{self.name}"
+    puts "Age: #{self.age}"
+    puts "National Id: #{self.national_id}"
+  end
 end
 
 person_1 = Person.new
