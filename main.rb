@@ -41,9 +41,6 @@ class Person
   def self.destroy_all
     @@records.clear
   end
-  def update
-
-  end
 
   def self.count
     return @@records.size
@@ -123,23 +120,19 @@ def search_user
   end
 end
 
-def edit_user(people)
+def edit_user
   puts "Enter your National ID"
-  search_input = gets.chomp.to_i
-  searched = people.select { |person| person[:national_id] == search_input }
-  if searched == []
+  person = Person.new
+  person = Person.find_by_national_id(gets.chomp.to_i)
+  if person == nil
     puts "User not dounf"
   else
-    puts "enter your new name"
-    new_name = gets.chomp
-    puts "enter your new age"
-    new_age = gets.chomp
-    people.each_index do |person|
-      if people[person][:national_id] == search_input
-        people[person][:name] = new_name
-        people[person][:age] = new_age
-      end
-    end
+      person_index = Person.all.find_index(person)
+      puts "Enter your new name"
+      person.name = gets.chomp
+      puts "Enter your new age"
+      person.age = gets.chomp
+      Person.all[person_index] = person
     show_user
   end
 end
@@ -195,7 +188,8 @@ while true
   elsif choice == 3
     search_user
   elsif choice == 4
-    edit_user(people)
+    edit_user
+    # update
   elsif choice == 5
     exit_program
   end
