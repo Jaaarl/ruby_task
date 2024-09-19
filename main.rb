@@ -86,21 +86,15 @@ def add_user
   end
 end
 
-def delete_user(people)
+def delete_user
+  person = Person.new
   puts "Enter the national id"
-  national_id = gets.chomp.to_i
-  is_found = false
-  people.each_index do |person|
-    if people[person][:national_id] == national_id
-      is_found = true
-    end
-  end
-  if is_found
-    people = people.delete_if { |person| person[:national_id] == national_id }
-    puts "Successfully deleted."
-    show_user
+  person = Person.search_id(gets.chomp.to_i)
+  if person == nil
+    puts "User not dounf"
   else
-    puts "User not found."
+    person.destroy
+    show_user
   end
 end
 
@@ -197,7 +191,7 @@ while true
   if choice == 1
     add_user
   elsif choice == 2
-    delete_user(people)
+    delete_user
   elsif choice == 3
     search_user
   elsif choice == 4
